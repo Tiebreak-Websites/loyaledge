@@ -1,4 +1,9 @@
-<form class="form reveal" id="applyForm" novalidate>
+<form
+  class="form reveal"
+  id="applyForm"
+  method="POST"
+  enctype="multipart/form-data"
+>
   <input type="hidden" name="to" value="ivan.milincic@tiebreak.dev" />
   <input type="hidden" name="website" value="loyaledge.net" />
 
@@ -122,7 +127,7 @@
   formsub.newForm({
     formId: "applyForm",
     submitButton: "#applySubmit",
-    ajaxUrl: "https://wordpress.plexop.dev/wp-json/v1/career-form",
+    ajaxUrl: "https://wordpress.plexop.dev/wp-json/tiebreak/v1/career-form",
     method: "POST",
     indicator: "#formSending",
   });
