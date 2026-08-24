@@ -1,0 +1,149 @@
+<form class="form reveal" id="applyForm" novalidate>
+  <input type="hidden" name="to" value="ivan.milincic@tiebreak.dev" />
+  <input type="hidden" name="website" value="loyaledge.net" />
+
+  <div class="field">
+    <label for="name"
+      >Full name <span class="req" aria-hidden="true">*</span></label
+    >
+    <input id="name" name="name" type="text" autocomplete="name" required />
+  </div>
+
+  <div class="field">
+    <label for="email"
+      >Email <span class="req" aria-hidden="true">*</span></label
+    >
+    <input id="email" name="email" type="email" autocomplete="email" required />
+  </div>
+
+  <div class="field">
+    <label for="phone"
+      >Phone <span class="req" aria-hidden="true">*</span></label
+    >
+    <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+  </div>
+
+  <div class="field">
+    <label for="languages"
+      >Languages spoken <span class="req" aria-hidden="true">*</span></label
+    >
+    <input
+      id="languages"
+      name="language"
+      type="text"
+      placeholder="Which languages do you speak?"
+      required
+    />
+  </div>
+
+  <div class="field">
+    <label for="location">
+      Current location <span class="req" aria-hidden="true">*</span>
+    </label>
+    <input
+      id="location"
+      name="location"
+      type="text"
+      placeholder="City, country"
+      autocomplete="country-name"
+      required
+    />
+  </div>
+
+  <div class="field">
+    <label for="role"
+      >Role you're applying for <span class="req" aria-hidden="true">*</span
+      ></label
+    >
+    <select id="role" name="position" required>
+      <option value="csr-multilingual"
+        >Customer Support Representative – (relevant language speaker)</option
+      >
+      <option value="future">Other / future opening</option>
+    </select>
+  </div>
+
+  <div class="field field-wide">
+    <label for="linkedin"
+      >LinkedIn profile <span class="opt">(or attach a CV below)</span></label
+    >
+    <input
+      id="linkedin"
+      name="link"
+      type="url"
+      placeholder="https://linkedin.com/in/…"
+    />
+  </div>
+
+  <div class="field field-wide">
+    <label for="cv"
+      >CV / résumé <span class="opt">(PDF or DOCX, optional)</span></label
+    >
+    <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx" />
+  </div>
+
+  <div class="field field-wide">
+    <label for="why">Why Malta? <span class="opt">(optional)</span></label>
+    <textarea
+      id="why"
+      name="message"
+      rows="4"
+      placeholder="Tell us what's drawing you to the move."></textarea>
+  </div>
+
+  <div class="field field-wide consent">
+    <label class="check">
+      <input id="consent" name="consent" type="checkbox" value="1" required />
+      <span>
+        I consent to LoyalEdge storing and processing my details for the purpose
+        of this application, as described in the <a href="/privacy.html"
+          >Privacy Policy</a
+        >.
+        <span class="req" aria-hidden="true">*</span>
+      </span>
+    </label>
+  </div>
+
+  <div class="field-wide form-actions">
+    <button class="btn btn-primary btn-lg" type="submit" id="applySubmit">
+      Send my application
+    </button>
+    <p id="formSending" class="hidden">Sending your application…</p>
+    <p class="form-note">
+      We'll never share your details with anyone outside the hiring team.
+    </p>
+  </div>
+
+  <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+</form>
+
+<script is:inline src="/js/formsub.min.js"></script>
+<script is:inline>
+  formsub.newForm({
+    formId: "applyForm",
+    submitButton: "#applySubmit",
+    ajaxUrl: "https://wordpress.plexop.dev/wp-json/v1/career-form",
+    method: "POST",
+    indicator: "#formSending",
+  });
+
+  window.addEventListener("formsub:ResponseSuccess", function (event) {
+    if (event.detail.form_css_id !== "applyForm") return;
+    var status = document.getElementById("formStatus");
+    if (!status) return;
+    status.textContent =
+      event.detail.message ||
+      "Thank you — your application is in. We reply to every applicant.";
+    status.className = "form-status is-ok";
+  });
+
+  window.addEventListener("formsub:ResponseError", function (event) {
+    if (event.detail.form_css_id !== "applyForm") return;
+    var status = document.getElementById("formStatus");
+    if (!status) return;
+    status.textContent =
+      event.detail.message ||
+      "Something went wrong sending your application. Please email hr@loyaledge.net instead.";
+    status.className = "form-status is-bad";
+  });
+</script>

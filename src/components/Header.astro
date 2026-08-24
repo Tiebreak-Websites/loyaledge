@@ -1,0 +1,29 @@
+---
+interface Props {
+  home?: boolean;
+}
+
+const { home = false } = Astro.props;
+const to = (hash: string) => (home ? hash : `/${hash}`);
+---
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="logo" href={home ? '#top' : '/'} aria-label="LoyalEdge home">
+      <svg class="logo-svg" role="img" aria-hidden="true"><use href="#loyaledge"></use></svg>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href={to('#why')}>Why LoyalEdge</a>
+      <a href={to('#malta')}>Life in Malta</a>
+      <a href={to('#roles')}>Open Roles</a>
+      <a href={to('#benefits')}>Benefits</a>
+      <a href={to('#growth')}>Growth</a>
+      <a class="btn btn-primary btn-sm nav-cta" href={to('#apply')}>Apply Now</a>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>

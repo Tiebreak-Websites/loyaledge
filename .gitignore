@@ -3,8 +3,14 @@
 Thumbs.db
 *.log
 
+# Astro
+node_modules/
+dist/
+.astro/
+
 # Local Claude Code tooling (dev-server config, not part of the site)
 .claude/
+.cursor/
 
 # Wrangler local cache
 .wrangler/

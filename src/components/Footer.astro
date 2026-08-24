@@ -1,0 +1,45 @@
+---
+interface Props {
+  home?: boolean;
+}
+
+const { home = false } = Astro.props;
+const to = (hash: string) => (home ? hash : `/${hash}`);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <svg class="logo-svg logo-svg--footer" role="img" aria-label="LoyalEdge"><use href="#loyaledge"></use></svg>
+      <p>Client relationships, built to last.</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <a href={to('#why')}>Why LoyalEdge</a>
+      <a href={to('#malta')}>Life in Malta</a>
+      <a href={to('#roles')}>Open Roles</a>
+      <a href={to('#benefits')}>Benefits</a>
+      <a href={to('#apply')}>Apply</a>
+    </nav>
+
+    <div class="footer-legal">
+      <p><strong>LoyalEdge</strong> — international outsourcing in Customer Support and client relations, Malta.</p>
+      <p>LoyalEdge is an equal-opportunity employer. We welcome applicants of every background, and hire on merit alone.</p>
+      <p class="footer-contact">Questions? <a href="mailto:hr@loyaledge.net">hr@loyaledge.net</a> &middot; <a href="tel:+35620330428">+356 2033 0428</a></p>
+    </div>
+  </div>
+  <div class="wrap footer-disclaimer">
+    <p>
+      <strong>Disclaimer:</strong> Information on this website is provided for general
+      informational and recruitment purposes only. Employment opportunities, remuneration,
+      benefits and incentives are subject to eligibility, applicable company policies and
+      the terms of any individual employment offer. Nothing on this website constitutes a
+      guarantee of employment, remuneration, benefits or career progression.
+    </p>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>&copy; <span id="year">{year}</span> LoyalEdge. All rights reserved.</p>
+    <p><a href="/terms.html">Terms &amp; Conditions</a> · <a href="/privacy.html">Privacy Policy</a></p>
+  </div>
+</footer>

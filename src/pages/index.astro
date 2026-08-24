@@ -1,0 +1,700 @@
+---
+import Layout from "../layouts/Layout.astro";
+import heroValletta from "../assets/hero-valletta.webp";
+import maltaCoast from "../assets/malta-coast.webp";
+import officeConversation from "../assets/office-conversation.webp";
+import officeTeam from "../assets/office-team.webp";
+import CareersForm from "../components/CareersForm.astro";
+---
+
+<Layout
+  home
+  title="LoyalEdge Careers — Customer Support Roles in Malta"
+  description="Join LoyalEdge in Malta as a Customer Support Representative. Support an established book of clients, with rewards tied to the value you protect, full relocation support and paid training."
+  ogDescription="Build client relationships that last, in the Mediterranean sun. Paid training, performance rewards, full relocation support."
+  twitterDescription="Build client relationships that last, in the Mediterranean sun."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org/",
+        "@type": "JobPosting",
+        "title": "Customer Support Representative (Multilingual)",
+        "description": "Support an established book of clients as the lead point of contact for their day-to-day needs. Respond to client requests, keep operations running smoothly, and maintain high standards of client care and communication.",
+        "employmentType": "FULL_TIME",
+        "hiringOrganization": {
+          "@type": "Organization",
+          "name": "LoyalEdge",
+          "description": "International outsourcing company specialising in Customer Support and client relations."
+        },
+        "jobLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "MT",
+            "addressLocality": "Malta"
+          }
+        },
+        "skills": "Customer support, client relationship management, communication, multilingual",
+        "jobBenefits": "Fixed base salary, monthly commission structure, relocation package with flight assistance and accommodation support, paid onboarding and training, weekly food allowance after three months, employee discounts, incentive programs."
+      }
+    </script>
+  </Fragment>
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <h1 class="hero-title">
+          <span class="hl" style="--l:1"><span>Build client</span></span>
+          <span class="hl" style="--l:2"><span>relationships</span></span>
+          <span class="hl" style="--l:3"><span>that last.</span></span>
+          <span class="hl hl-acc" style="--l:4"
+            ><span class="acc">In the Mediterranean sun.</span></span
+          >
+        </h1>
+        <p class="lede reveal-load" style="--l:5">
+          Join LoyalEdge in Malta as a Customer Support Representative. Support
+          an established book of loyal clients, earn rewards tied to the value
+          you protect, and live somewhere that feels like a permanent getaway.
+        </p>
+        <div class="hero-cta reveal-load" style="--l:6">
+          <a class="btn btn-primary btn-lg" href="#roles"
+            >View open roles<span class="btn-arr" aria-hidden="true"
+              >&rarr;</span
+            ></a
+          >
+          <a class="link-quiet" href="#malta">Discover life in Malta</a>
+        </div>
+      </div>
+
+      <figure class="hero-media">
+        <img
+          src={heroValletta.src}
+          width={heroValletta.width}
+          height={heroValletta.height}
+          alt="Valletta old town and the Grand Harbour in Malta at golden hour"
+          fetchpriority="high"
+        />
+      </figure>
+    </section>
+
+    <!-- ============ STAT BAND ============ -->
+    <div class="statband">
+      <div class="wrap">
+        <ul class="trust reveal">
+          <li><strong>200+</strong><span>Professionals on site</span></li>
+          <li><strong>Multi</strong><span>National team</span></li>
+          <li><strong>Full</strong><span>Relocation support</span></li>
+          <li><strong>100%</strong><span>Paid training</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============ WHY LOYALEDGE ============ -->
+    <section class="section" id="why">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <h2>A career built on trust</h2>
+          <p class="section-sub">
+            We look for people who are genuinely good with people — and then we
+            give them the training and the rewards structure to turn that into a
+            career.
+          </p>
+        </header>
+
+        <div class="props">
+          <article class="prop reveal">
+            <h3>High-touch relationship management</h3>
+            <p class="prop-quote">
+              "At LoyalEdge, relationships are built to last."
+            </p>
+            <p>
+              You'll support an established book of clients across our European
+              offices. The focus is service quality and durable client
+              relationships, responding to client needs, keeping operations
+              running smoothly, and maintaining high standards of client care
+              and communication.
+            </p>
+          </article>
+
+          <article class="prop reveal">
+            <h3>High-yield compensation structures</h3>
+            <p class="prop-quote">
+              "We reward Customer Support Representatives who protect client
+              value."
+            </p>
+            <p>
+              Strong fixed base salaries with performance-based bonuses. Your
+              growth reflects the quality of service you provide, your
+              professionalism, and your contribution to positive client
+              experiences.
+            </p>
+          </article>
+
+          <article class="prop reveal">
+            <h3>Specialised masterclass training</h3>
+            <p class="prop-quote">"Master the art of Customer Support."</p>
+            <p>
+              Customer Support takes deep analytical skill, strategic empathy
+              and commercial acumen. Advanced skills in consultative negotiation
+              and behaviour support gives you the communication frameworks to
+              handle complex situations with absolute confidence.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHO WE'RE LOOKING FOR ============ -->
+    <section class="section" id="candidates">
+      <div class="wrap cand-grid">
+        <figure class="cand-media media-reveal reveal">
+          <img
+            src={officeConversation.src}
+            width={officeConversation.width}
+            height={officeConversation.height}
+            alt="Two colleagues in a relaxed one-to-one conversation at a desk in a bright, modern office"
+            loading="lazy"
+          />
+        </figure>
+
+        <div>
+          <header class="section-head reveal">
+            <h2>Designed for ambitious customer-support professionals</h2>
+          </header>
+
+          <div class="profiles">
+            <article class="profile reveal">
+              <h3>The customer-support specialist</h3>
+              <p>
+                Proven experience in customer-support leadership or relationship
+                management.
+              </p>
+            </article>
+
+            <article class="profile reveal">
+              <h3>The strategic communicator</h3>
+              <p>
+                Passionate about meaningful, articulate conversations — and
+                about genuinely understanding what each client needs.
+              </p>
+            </article>
+
+            <article class="profile reveal">
+              <h3>The high-performer</h3>
+              <p>
+                Self-motivated and goal-oriented. You thrive on keeping your
+                metrics high and your clients satisfied, day in and day out.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MALTA ============ -->
+    <section class="malta-band band-dark" id="malta">
+      <figure class="malta-media reveal">
+        <img
+          src={maltaCoast.src}
+          width={maltaCoast.width}
+          height={maltaCoast.height}
+          alt="Maltese limestone coastline with turquoise Mediterranean water and a historic town in the distance"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="malta-panel">
+        <header class="reveal">
+          <h2>Mediterranean living. Executive standards.</h2>
+          <p class="section-sub">
+            Transitioning your career to Malta with LoyalEdge is smooth and
+            fully supported. Enjoy a secure, sunny and vibrant lifestyle while
+            working in an English-speaking corporate environment — one of
+            Europe's safest and most established business hubs, with an
+            international network of senior professionals around you.
+          </p>
+        </header>
+
+        <div class="malta-list">
+          <article class="m-item reveal">
+            <h3>Travel &amp; relocation support</h3>
+            <p>
+              Comprehensive assistance with flights and the move itself — fully
+              supported from day one.
+            </p>
+          </article>
+          <article class="m-item reveal">
+            <h3>Temporary accommodation guidance</h3>
+            <p>
+              Help finding your initial accommodation while you get to know the
+              island.
+            </p>
+          </article>
+          <article class="m-item reveal">
+            <h3>Full administrative setup</h3>
+            <p>
+              ID, tax and banking sorted with complete admin support — all in
+              English, with zero language barrier.
+            </p>
+          </article>
+          <article class="m-item reveal">
+            <h3>300 days of sun</h3>
+            <p>
+              A premium expat lifestyle — Mediterranean climate, crystal-clear
+              sea and a thriving international community.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OPEN ROLES ============ -->
+    <section class="section" id="roles">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <h2>Roles we're hiring for right now</h2>
+          <p class="section-sub">
+            Every role below is based on site in Malta and includes the full
+            relocation package.
+          </p>
+        </header>
+
+        <div class="roles">
+          <!-- Single multilingual role block. Specific language requirements belong on the
+             individual open positions, not on this page. -->
+          <article class="role reveal" data-role-id="csr-multilingual">
+            <h3 class="role-head">
+              <button
+                type="button"
+                class="role-toggle"
+                aria-expanded="false"
+                aria-controls="role-csr-multilingual"
+              >
+                <span class="role-title">
+                  Customer Support Representative <em>— Multilingual</em>
+                  <span class="role-tags">
+                    <span class="tag tag-accent">Multilingual</span>
+                    <span class="tag">Malta · On-site</span>
+                    <span class="tag">Full-time</span>
+                    <span class="tag">Relocation included</span>
+                  </span>
+                </span>
+                <span class="role-chev" aria-hidden="true"></span>
+              </button>
+            </h3>
+
+            <div class="role-body" id="role-csr-multilingual" hidden>
+              <div class="role-body-inner">
+                <p class="role-overview">
+                  Create long-term, trusting relationships with our customers.
+                  You'll support an established book of clients, acting as the
+                  lead point of contact for their day-to-day needs, and work
+                  closely with Customer Service and other internal teams to
+                  improve the whole client experience.
+                </p>
+
+                <ul class="role-facts">
+                  <li class="fact">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      ><rect x="2.5" y="6" width="19" height="12" rx="2"
+                      ></rect><circle cx="12" cy="12" r="2.6"></circle><path
+                        d="M6.2 12h.01M17.8 12h.01"></path></svg
+                    >
+                    Fixed base salary + monthly commission
+                  </li>
+                  <li class="fact">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      ><path d="M12 4L2 9l10 5 10-5-10-5z"></path><path
+                        d="M6 11.5V16c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.5"
+                      ></path></svg
+                    >
+                    Fully paid onboarding &amp; training
+                  </li>
+                  <li class="fact">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      ><path d="M21 3L10.5 13.5"></path><path
+                        d="M21 3l-6.8 18-3.7-7.5L3 9.8z"></path></svg
+                    >
+                    Complete relocation package
+                  </li>
+                </ul>
+
+                <div class="role-cols">
+                  <div>
+                    <h4>What you'll do</h4>
+                    <ul class="ticks">
+                      <li>
+                        Operate as the lead point of contact for all matters
+                        specific to the clients you support.
+                      </li>
+                      <li>
+                        Build and maintain strong, long-lasting client
+                        relationships.
+                      </li>
+                      <li>
+                        Develop trusted-advisor relationships with key clients.
+                      </li>
+                      <li>
+                        Ensure timely, successful delivery of our support
+                        against client needs and objectives.
+                      </li>
+                      <li>
+                        Keep day-to-day operations running smoothly for the
+                        clients you support.
+                      </li>
+                      <li>
+                        Meet and exceed daily client-care and service-quality
+                        targets.
+                      </li>
+                      <li>
+                        Handle challenging client requests and issue
+                        escalations.
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>What you'll bring</h4>
+                    <ul class="ticks">
+                      <li>
+                        Fluent English plus at least one additional European
+                        language, written and verbal.
+                      </li>
+                      <li>
+                        Strong communication skills to reach outcomes that work
+                        for both sides.
+                      </li>
+                      <li>
+                        Previous experience in customer support, client care or
+                        a comparable client-facing role.
+                      </li>
+                      <li>
+                        Proven ability to manage multiple client relationships
+                        at once with sharp attention to detail.
+                      </li>
+                      <li>
+                        Excellent listening, negotiation and presentation
+                        ability.
+                      </li>
+                      <li>Genuine enthusiasm, energy and imagination.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="role-cta">
+                  <a
+                    class="btn btn-primary role-apply"
+                    href="#apply"
+                    data-apply="csr-multilingual"
+                    >Apply for this role<span class="btn-arr" aria-hidden="true"
+                      >&rarr;</span
+                    ></a
+                  >
+                  <p class="role-reply">
+                    We read every application and reply either way.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="roles-note reveal">
+          Specific language requirements are listed on each open position. Apply
+          anyway and tell us which languages you speak.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ BENEFITS ============ -->
+    <section class="section section-panel" id="benefits">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <h2>What comes with the job</h2>
+        </header>
+
+        <ul class="perks">
+          <li class="perk reveal">
+            <span class="perk-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><rect x="2.5" y="6" width="19" height="12" rx="2"
+                ></rect><circle cx="12" cy="12" r="2.6"></circle><path
+                  d="M6.2 12h.01M17.8 12h.01"></path></svg
+              ></span
+            >
+            Fixed base salary
+          </li>
+          <li class="perk reveal">
+            <span class="perk-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M3 17l5.5-5.5 4 4L21 7"></path><path
+                  d="M15.5 7H21v5.5"></path></svg
+              ></span
+            >
+            Attractive monthly commission structure
+          </li>
+          <li class="perk reveal">
+            <span class="perk-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M21 3L10.5 13.5"></path><path
+                  d="M21 3l-6.8 18-3.7-7.5L3 9.8z"></path></svg
+              ></span
+            >
+            Relocation package — flights and accommodation support
+          </li>
+          <li class="perk reveal">
+            <span class="perk-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M12 4L2 9l10 5 10-5-10-5z"></path><path
+                  d="M6 11.5V16c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.5"
+                ></path></svg
+              ></span
+            >
+            Comprehensive onboarding and training
+          </li>
+          <li class="perk reveal">
+            <span class="perk-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path
+                  d="M4 5.5A2.5 2.5 0 016.5 3H20v15.5H6.5A2.5 2.5 0 004 21V5.5z"
+                ></path><path d="M4 18.5A2.5 2.5 0 016.5 16H20"></path></svg
+              ></span
+            >
+            Education and development
+          </li>
+          <li class="perk reveal">
+            <span class="perk-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M7 3v18"></path><path d="M4 3v3.5a3 3 0 006 0V3"
+                ></path><path
+                  d="M17 3c-1.8 1.2-2.8 3.2-2.8 5.2 0 2.3 1.2 3.8 2.8 3.8V21"
+                ></path></svg
+              ></span
+            >
+            Weekly food allowance after three months
+          </li>
+          <li class="perk reveal">
+            <span class="perk-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path
+                  d="M20.6 13.4l-7.2 7.2a2 2 0 01-2.8 0L3 13V3h10l7.6 7.6a2 2 0 010 2.8z"
+                ></path><path d="M7.5 7.5h.01"></path></svg
+              ></span
+            >
+            Employee discounts with local partners
+          </li>
+          <li class="perk reveal">
+            <span class="perk-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M8 21h8M12 17v4"></path><path
+                  d="M7 4h10v5a5 5 0 01-10 0V4z"></path><path
+                  d="M7 6H4v1a3 3 0 003 3M17 6h3v1a3 3 0 01-3 3"></path></svg
+              ></span
+            >
+            Incentive programs and performance rewards
+          </li>
+          <li class="perk reveal">
+            <span class="perk-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M4 21V5a2 2 0 012-2h8a2 2 0 012 2v16"></path><path
+                  d="M16 9h2a2 2 0 012 2v10"></path><path d="M3 21h18"
+                ></path><path d="M8 7h2M8 11h2M8 15h2"></path></svg
+              ></span
+            >
+            Modern international office, 200+ employees
+          </li>
+          <li class="perk reveal">
+            <span class="perk-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M3 20h4.5v-4.5H12V11h4.5V6.5H21"></path><path
+                  d="M17 6.5h4v4"></path></svg
+              ></span
+            >
+            Career progression opportunities
+          </li>
+        </ul>
+
+        <p class="perks-note reveal">
+          Benefits and incentives may vary by role and are subject to the
+          Company's offer, eligibility criteria and applicable employment terms.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ GROWTH ============ -->
+    <section class="section" id="growth">
+      <div class="wrap growth-grid">
+        <header class="section-head reveal">
+          <h2>Opportunities to progress</h2>
+          <p class="section-sub">
+            At LoyalEdge, employees who demonstrate strong performance,
+            commitment and leadership potential have access to long-term growth
+            across multiple departments and management levels. Continuous
+            executive coaching is designed to elevate Customer Support
+            Representatives into Customer Relationship Manager.
+          </p>
+        </header>
+
+        <ol class="path reveal">
+          <li>
+            <span class="path-num">01</span><h3>
+              Customer Support Representative
+            </h3><p>Support your first clients following paid onboarding.</p>
+          </li>
+          <li>
+            <span class="path-num">02</span><h3>Senior Manager</h3><p>
+              Support established clients, higher-tier bonus structure.
+            </p>
+          </li>
+          <li>
+            <span class="path-num">03</span><h3>Team Leader</h3><p>
+              Coach and lead your own group of Customer Support Representatives.
+            </p>
+          </li>
+          <li>
+            <span class="path-num">04</span><h3>
+              Customer Relationship Manager
+            </h3><p>
+              Run a full team — plus routes into QA and Operational Coaching.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="wrap about-grid">
+        <div class="reveal">
+          <h2>LoyalEdge</h2>
+          <p class="section-sub about-copy">
+            LoyalEdge is an international outsourcing company specialising in
+            Customer Support. With over 200 professionals representing multiple
+            nationalities, we provide a dynamic, performance-driven environment
+            where ambitious individuals build successful long-term careers.
+          </p>
+          <p class="about-copy">
+            We're committed to excellence, continuous development, and creating
+            opportunities for people who are motivated to achieve exceptional
+            results within a collaborative international team.
+          </p>
+          <div class="about-stats">
+            <div class="stat">
+              <strong>200+</strong><span>Professionals</span>
+            </div>
+            <div class="stat">
+              <strong>Multi</strong><span>Nationality team</span>
+            </div>
+            <div class="stat"><strong>Malta</strong><span>Modern HQ</span></div>
+          </div>
+        </div>
+        <figure class="about-media media-reveal reveal">
+          <img
+            src={officeTeam.src}
+            width={officeTeam.width}
+            height={officeTeam.height}
+            alt="A team collaborating around a table in a bright, modern office lounge"
+            loading="lazy"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ APPLY ============ -->
+    <section class="section" id="apply">
+      <div class="wrap apply-grid">
+        <header class="section-head reveal">
+          <h2>Ready to join our Customer Support team?</h2>
+          <p class="section-sub">
+            We're currently onboarding Customer Support Representatives for our
+            European operations. Two minutes to apply — we read every
+            application and reply either way.
+          </p>
+        </header>
+
+        <CareersForm />
+      </div>
+    </section>
+  </main>
+</Layout>
