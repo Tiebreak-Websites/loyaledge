@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import siteJs from "../scripts/site.js?raw";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import LogoSymbol from "../components/LogoSymbol.astro";
@@ -62,6 +63,6 @@ const {
     <Header home={home} />
     <slot />
     <Footer home={home} />
-    <script src="/js/site.js" is:inline defer></script>
+    <script is:inline set:html={siteJs}></script>
   </body>
 </html>

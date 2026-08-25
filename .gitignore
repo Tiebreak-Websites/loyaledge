@@ -14,3 +14,6 @@ dist/
 
 # Wrangler local cache
 .wrangler/
+
+# Local deploy credentials
+deploy.env

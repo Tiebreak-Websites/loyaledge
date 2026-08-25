@@ -1,3 +1,7 @@
+---
+import formsubJs from "../scripts/formsub.min.js?raw";
+---
+
 <form
   class="form reveal"
   id="applyForm"
@@ -122,7 +126,7 @@
   <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
 </form>
 
-<script is:inline src="/js/formsub.min.js"></script>
+<script is:inline set:html={formsubJs}></script>
 <script is:inline>
   formsub.newForm({
     formId: "applyForm",
