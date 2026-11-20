@@ -1,0 +1,29 @@
+---
+/**
+ * Apply section with the careers form.
+ * Text comes from src/data/i18n.json (apply_title, apply_description, form_*).
+ * From WordPress, passed in from index.astro: the "Role" dropdown (open_roles.roles)
+ * and the recipient email (application_form_recipient).
+ */
+import CareersForm from "@src/components/CareersForm.astro";
+import { i18n } from "@tiebreak/api/utility/util";
+
+interface Props {
+  roles?: any[];
+  recipient?: string;
+  lang?: string;
+}
+
+const { roles = [], recipient, lang = "en" } = Astro.props;
+---
+
+<section class="section" id="apply">
+  <div class="wrap apply-grid">
+    <header class="section-head reveal">
+      <h2>{i18n("apply_title", lang)}</h2>
+      <p class="section-sub">{i18n("apply_description", lang)}</p>
+    </header>
+
+    <CareersForm roles={roles} recipient={recipient} lang={lang} />
+  </div>
+</section>

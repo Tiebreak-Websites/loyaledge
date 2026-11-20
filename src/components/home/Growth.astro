@@ -1,0 +1,41 @@
+---
+/**
+ * Growth / career path — WordPress ACF group "growth", passed in from index.astro.
+ *
+ * "growth": {
+ *   "title": "Opportunities to progress",
+ *   "description": "At LoyalEdge, employees who demonstrate strong performance …",
+ *   "steps": [{ "title": "Customer Support Representative", "text": "Support your first clients …" }]
+ * }
+ *
+ * Step numbers (01, 02 …) come from the order of the steps in WordPress.
+ */
+interface Props {
+  growth?: {
+    title?: string;
+    description?: string;
+    steps?: { title?: string; text?: string }[];
+  };
+  lang?: string;
+}
+
+const { growth } = Astro.props;
+const steps = growth?.steps || [];
+---
+
+<section class="section" id="growth">
+  <div class="wrap growth-grid">
+    <header class="section-head reveal">
+      {growth?.title && <h2>{growth.title}</h2>}
+      {growth?.description && <p class="section-sub">{growth.description}</p>}
+    </header>
+
+    <ol class="path reveal">
+      {steps.map((step, i) => (
+        <li>
+          <span class="path-num">{String(i + 1).padStart(2, "0")}</span>{step.title && <h3>{step.title}</h3>}{step.text && <p>{step.text}</p>}
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

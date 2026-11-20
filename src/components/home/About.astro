@@ -1,0 +1,65 @@
+---
+/**
+ * About LoyalEdge — WordPress ACF group "about", passed in from index.astro.
+ *
+ * "about": {
+ *   "title": "LoyalEdge",
+ *   "intro": "LoyalEdge is an international outsourcing company …",   // larger first paragraph
+ *   "text": "We're committed to excellence …",
+ *   "image": { "url": "https://…/office-team.jpg", "width": 1600, "height": 1200, "alt": "" },  // or false
+ *   "image_alt": "A team collaborating around a table …",                                  // optional
+ *   "stats": [{ "value": "200+", "label": "Professionals" }]
+ * }
+ *
+ * Image: the WordPress upload, converted to WebP at build time. Until one is uploaded
+ * ("image": false) the local src/assets/office-team.webp is used.
+ * Alt: image_alt, else the image's Media Library alt text, else the default below.
+ */
+import { getImage } from "astro:assets";
+import fallbackImage from "@src/assets/office-team.webp";
+
+const FALLBACK_ALT = "A team collaborating around a table in a bright, modern office lounge";
+
+interface Props {
+  about?: any;
+  lang?: string;
+}
+
+const { about } = Astro.props;
+const stats: { value?: string; label?: string }[] = about?.stats || [];
+
+const source = about?.image;
+const image = source?.url
+  ? {
+      src: (await getImage({ src: source.url, width: source.width, height: source.height, format: "webp" })).src,
+      width: source.width,
+      height: source.height,
+      alt: about?.image_alt || source.alt || FALLBACK_ALT,
+    }
+  : {
+      src: fallbackImage.src,
+      width: fallbackImage.width,
+      height: fallbackImage.height,
+      alt: about?.image_alt || FALLBACK_ALT,
+    };
+---
+
+<section class="section" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      {about?.title && <h2>{about.title}</h2>}
+      {about?.intro && <p class="section-sub about-copy">{about.intro}</p>}
+      {about?.text && <p class="about-copy">{about.text}</p>}
+      {stats.length > 0 && (
+        <div class="about-stats">
+          {stats.map((stat) => (
+            <div class="stat"><strong>{stat.value}</strong><span>{stat.label}</span></div>
+          ))}
+        </div>
+      )}
+    </div>
+    <figure class="about-media media-reveal reveal">
+      <img src={image.src} width={image.width} height={image.height} alt={image.alt} loading="lazy" />
+    </figure>
+  </div>
+</section>

@@ -1,0 +1,83 @@
+---
+/**
+ * Hero — WordPress ACF group "hero", passed in from index.astro.
+ *
+ * "hero": {
+ *   "title": "<h1>Build client<br />\nrelationships<br />\nthat last.</h1>",  // WYSIWYG (Heading 1): one line per <br>
+ *   "title_accent": "In the Mediterranean sun.",
+ *   "description": "<p>Join LoyalEdge in Malta as …</p>",                       // WYSIWYG
+ *   "button_link": { "title": "View open roles", "url": "/#roles", "target": "" },
+ *   "secondary_link": { "title": "Discover life in Malta", "url": "/#malta", "target": "" },
+ *   "hero_image": { "url": "https://…/hero-valletta.jpg", "width": 1856, "height": 2304, "alt": "" },
+ *   "hero_image_alt": "Valletta old town and the Grand Harbour in Malta at golden hour"
+ * }
+ *
+ * The title always renders as ONE <h1> with one animated line per <br>.
+ * The image is downloaded and converted to WebP at build time.
+ * Image alt: hero_image_alt, else the image's Media Library alt text.
+ */
+import { getImage } from "astro:assets";
+
+interface Props {
+  hero?: any;
+  lang?: string;
+}
+
+const { hero } = Astro.props;
+
+// "<h1>Build client<br />relationships<br />that last.</h1>" → one line per <br>.
+// The WordPress <h1> becomes the <h1 class="hero-title"> below (with one animated span per line).
+const lines: string[] = (hero?.title ?? "")
+  .replace(/<(?!br\b)[^>]*>/gi, "") // drop every tag except <br> (h1, h2, p, strong…)
+  .split(/<br\s*\/?>/i)
+  .map((line: string) => line.trim())
+  .filter(Boolean);
+const n = lines.length;
+
+// "<p>…</p>" → its inner HTML (it goes inside the existing <p class="lede">).
+const description = (hero?.description ?? "").trim().replace(/^<p[^>]*>|<\/p>$/gi, "");
+
+const button = hero?.button_link;
+const secondary = hero?.secondary_link;
+
+const source = hero?.hero_image;
+const image = source?.url
+  ? await getImage({ src: source.url, width: source.width, height: source.height, format: "webp" })
+  : null;
+---
+
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <h1 class="hero-title">
+      {lines.map((line, i) => (
+        <span class="hl" style={`--l:${i + 1}`}><span>{line}</span></span>
+      ))}
+      {hero?.title_accent && (
+        <span class="hl hl-acc" style={`--l:${n + 1}`}><span class="acc">{hero.title_accent}</span></span>
+      )}
+    </h1>
+    {description && <p class="lede reveal-load" style={`--l:${n + 2}`} set:html={description} />}
+    <div class="hero-cta reveal-load" style={`--l:${n + 3}`}>
+      {button?.url && (
+        <a class="btn btn-primary btn-lg" href={button.url} target={button.target || undefined}>
+          {button.title}<span class="btn-arr" aria-hidden="true">&rarr;</span>
+        </a>
+      )}
+      {secondary?.url && (
+        <a class="link-quiet" href={secondary.url} target={secondary.target || undefined}>{secondary.title}</a>
+      )}
+    </div>
+  </div>
+
+  {image && (
+    <figure class="hero-media">
+      <img
+        src={image.src}
+        width={source.width}
+        height={source.height}
+        alt={hero?.hero_image_alt || source.alt || ""}
+        fetchpriority="high"
+      />
+    </figure>
+  )}
+</section>

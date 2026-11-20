@@ -9,6 +9,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@tiebreak-websites/astro-wp": "^0.1.8",
     "astro": "^7.2.4"
   }
 }

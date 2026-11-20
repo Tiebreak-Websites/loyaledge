@@ -1,29 +1,73 @@
 ---
+/**
+ * Site header. From WordPress, passed in by Layout.astro:
+ *   menu — ACF repeater "menu": [{ "link": { "title", "url": "/#why", "target" } }]
+ *   logo — ACF image "logo" (dark logo for the white header). Converted to WebP at build.
+ *          While it is empty, the inline SVG logo (LogoSymbol.astro, #loyaledge) is used.
+ * "Apply Now" is fixed here; its text is `apply_now` in src/data/i18n.json.
+ */
+import { getImage } from "astro:assets";
+import { i18n } from "@tiebreak/api/utility/util";
+
 interface Props {
   home?: boolean;
+  lang?: string;
+  menu?: { link?: { title: string; url: string; target?: string } }[];
+  logo?: { url?: string; width?: number; height?: number } | false;
 }
 
-const { home = false } = Astro.props;
-const to = (hash: string) => (home ? hash : `/${hash}`);
+const { home = false, lang = "en", menu = [], logo } = Astro.props;
+const links = (menu || []).map((row) => row?.link).filter((link) => link?.url);
+
+// Logo shown at 156 × 47 (CSS .logo-svg). PNG (lossless, crisp edges) in 1×, 2× and 3×
+// so phones/tablets with 3× screens get a sharp logo too.
+const logoImg = logo && logo.url
+  ? await getImage({
+      src: logo.url,
+      width: 156,
+      height: Math.round(156 * (logo.height || 632) / (logo.width || 2090)),
+      densities: [1, 2, 3],
+      format: "png",
+    })
+  : null;
 ---
 
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
-    <a class="logo" href={home ? '#top' : '/'} aria-label="LoyalEdge home">
-      <svg class="logo-svg" role="img" aria-hidden="true"><use href="#loyaledge"></use></svg>
+    <a class="logo" href={home ? "#top" : "/"} aria-label="LoyalEdge home">
+      {logoImg ? (
+        <img class="logo-svg logo-img" src={logoImg.src} srcset={logoImg.srcSet.attribute} width="156" height="47" alt="" />
+      ) : (
+        <svg class="logo-svg" role="img" aria-hidden="true">
+          <use href="#loyaledge"></use>
+        </svg>
+      )}
     </a>
 
     <nav class="nav" id="nav" aria-label="Main">
-      <a href={to('#why')}>Why LoyalEdge</a>
-      <a href={to('#malta')}>Life in Malta</a>
-      <a href={to('#roles')}>Open Roles</a>
-      <a href={to('#benefits')}>Benefits</a>
-      <a href={to('#growth')}>Growth</a>
-      <a class="btn btn-primary btn-sm nav-cta" href={to('#apply')}>Apply Now</a>
+      {links.map(
+        (link) =>
+          link && (
+            <a href={link.url} target={link.target || undefined}>
+              {link.title}
+            </a>
+          ),
+      )}
+      <a class="btn btn-primary btn-sm nav-cta" href="/#apply">
+        {i18n("apply_now", lang)}
+      </a>
     </nav>
 
-    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
-      <span></span><span></span><span></span>
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-expanded="false"
+      aria-controls="nav"
+      aria-label="Open menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
   </div>
 </header>

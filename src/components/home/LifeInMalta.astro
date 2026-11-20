@@ -1,0 +1,68 @@
+---
+/**
+ * Life in Malta — WordPress ACF group "life_in_malta", passed in from index.astro.
+ *
+ * "life_in_malta": {
+ *   "title": "Mediterranean living. Executive standards.",
+ *   "description": "Transitioning your career to Malta with LoyalEdge is smooth …",
+ *   "image": { "url": "https://…/malta-coast.jpg", "width": 1600, "height": 1200, "alt": "" },  // or false
+ *   "image_alt": "Maltese limestone coastline …",                                            // optional
+ *   "items": [{ "title": "Travel & relocation support", "text": "Comprehensive assistance …" }]
+ * }
+ *
+ * Image: the WordPress upload, converted to WebP at build time. Until one is uploaded
+ * ("image": false) the local src/assets/malta-coast.webp is used.
+ * Alt: image_alt, else the image's Media Library alt text, else the default below.
+ * The image drifts on scroll (site.js parallax on `.malta-media img`).
+ */
+import { getImage } from "astro:assets";
+import fallbackImage from "@src/assets/malta-coast.webp";
+
+const FALLBACK_ALT =
+  "Maltese limestone coastline with turquoise Mediterranean water and a historic town in the distance";
+
+interface Props {
+  life_in_malta?: any;
+  lang?: string;
+}
+
+const malta = Astro.props.life_in_malta;
+const items: { title?: string; text?: string }[] = malta?.items || [];
+
+const source = malta?.image;
+const image = source?.url
+  ? {
+      src: (await getImage({ src: source.url, width: source.width, height: source.height, format: "webp" })).src,
+      width: source.width,
+      height: source.height,
+      alt: malta?.image_alt || source.alt || FALLBACK_ALT,
+    }
+  : {
+      src: fallbackImage.src,
+      width: fallbackImage.width,
+      height: fallbackImage.height,
+      alt: malta?.image_alt || FALLBACK_ALT,
+    };
+---
+
+<section class="malta-band band-dark" id="malta">
+  <figure class="malta-media reveal">
+    <img src={image.src} width={image.width} height={image.height} alt={image.alt} loading="lazy" />
+  </figure>
+
+  <div class="malta-panel">
+    <header class="reveal">
+      {malta?.title && <h2>{malta.title}</h2>}
+      {malta?.description && <p class="section-sub">{malta.description}</p>}
+    </header>
+
+    <div class="malta-list">
+      {items.map((item) => (
+        <article class="m-item reveal">
+          {item.title && <h3>{item.title}</h3>}
+          {item.text && <p>{item.text}</p>}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

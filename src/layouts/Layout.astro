@@ -4,6 +4,16 @@ import siteJs from "../scripts/site.js?raw";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import LogoSymbol from "../components/LogoSymbol.astro";
+import { getPage } from "@tiebreak/api/wp/pages";
+import { getLang, decodeAmpEntities } from "@tiebreak/api/utility/util";
+
+// Site language (SITE_LANG in .env), passed to components as a prop.
+const lang = getLang(Astro);
+
+// All content lives on one WordPress page (SITE_SLUG in .env, on WP_URL).
+// The layout uses its site-wide parts (menu, footer); pages pass sections to their components.
+const wpPage = await getPage(import.meta.env.SITE_SLUG, Astro);
+const wp = decodeAmpEntities(wpPage?.acf ?? {});
 
 interface Props {
   title: string;
@@ -25,7 +35,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -55,14 +65,17 @@ const {
         }
       </style></noscript
     >
+    <!-- FormSub (career form), wired in src/lib/forms.js -->
+    <script is:inline src="/js/formsub.min.js" defer></script>
+
     <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
     <LogoSymbol />
-    <Header home={home} />
+    <Header home={home} lang={lang} menu={wp.menu?.items} logo={wp.logo} />
     <slot />
-    <Footer home={home} />
+    <Footer footer={wp.footer} logo={wp.logo_light} lang={lang} />
     <script is:inline set:html={siteJs}></script>
   </body>
 </html>

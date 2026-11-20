@@ -1,0 +1,45 @@
+---
+/**
+ * "Why LoyalEdge" — WordPress ACF group "why_loyaledge", passed in from index.astro.
+ *
+ * "why_loyaledge": {
+ *   "title": "A career built on trust",
+ *   "description": "We look for people who are genuinely good with people — …",
+ *   "cards": [{
+ *     "title": "High-touch relationship management",
+ *     "quote": "\"At LoyalEdge, relationships are built to last.\"",
+ *     "text": "You'll support an established book of clients …"
+ *   }]
+ * }
+ */
+interface Props {
+  why_loyaledge?: {
+    title?: string;
+    description?: string;
+    cards?: { title?: string; quote?: string; text?: string }[];
+  };
+  lang?: string;
+}
+
+const { why_loyaledge } = Astro.props;
+const cards = why_loyaledge?.cards || [];
+---
+
+<section class="section" id="why">
+  <div class="wrap">
+    <header class="section-head reveal">
+      {why_loyaledge?.title && <h2>{why_loyaledge.title}</h2>}
+      {why_loyaledge?.description && <p class="section-sub">{why_loyaledge.description}</p>}
+    </header>
+
+    <div class="props">
+      {cards.map((card) => (
+        <article class="prop reveal">
+          {card.title && <h3>{card.title}</h3>}
+          {card.quote && <p class="prop-quote">{card.quote}</p>}
+          {card.text && <p>{card.text}</p>}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

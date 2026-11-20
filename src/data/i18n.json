@@ -1,0 +1,35 @@
+{
+  "en": {
+    "title": "English",
+    "name": "EN",
+    "apply_now": "Apply Now",
+
+    "apply_title": "Ready to join our Customer Support team?",
+    "apply_description": "We're currently onboarding Customer Support Representatives for our European operations. Two minutes to apply — we read every application and reply either way.",
+
+    "form_name_label": "Full name",
+    "form_email_label": "Email",
+    "form_phone_label": "Phone",
+    "form_languages_label": "Languages spoken",
+    "form_languages_placeholder": "Which languages do you speak?",
+    "form_location_label": "Current location",
+    "form_location_placeholder": "City, country",
+    "form_role_label": "Role you're applying for",
+    "form_other_role_option": "Other / future opening",
+    "form_linkedin_label": "LinkedIn profile",
+    "form_linkedin_hint": "(or attach a CV below)",
+    "form_linkedin_placeholder": "https://linkedin.com/in/…",
+    "form_cv_label": "CV / résumé",
+    "form_cv_hint": "(PDF or DOCX, optional)",
+    "form_message_label": "Why Malta?",
+    "form_message_hint": "(optional)",
+    "form_message_placeholder": "Tell us what's drawing you to the move.",
+    "form_consent_text": "I consent to LoyalEdge storing and processing my details for the purpose of this application, as described in the <a href=\"/privacy\">Privacy Policy</a>.",
+    "form_submit_label": "Send my application",
+    "form_sending_text": "Sending your application",
+    "form_success_button": "OK",
+    "form_note": "We'll never share your details with anyone outside the hiring team.",
+    "form_success_message": "Thank you — your application is in. We reply to every applicant.",
+    "form_error_message": "Something went wrong sending your application. Please email hr@loyaledge.net instead."
+  }
+}

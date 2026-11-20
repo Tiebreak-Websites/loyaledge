@@ -121,13 +121,12 @@
   });
 
   /* ---------- "Apply for this role" preselects the right option ---------- */
+  /* The button's data-apply (role number) matches the option's data-role. */
   var roleSelect = document.getElementById('role');
   Array.prototype.forEach.call(document.querySelectorAll('[data-apply]'), function (link) {
     link.addEventListener('click', function () {
-      var id = link.getAttribute('data-apply');
-      if (roleSelect && roleSelect.querySelector('option[value="' + id + '"]')) {
-        roleSelect.value = id;
-      }
+      var option = roleSelect && roleSelect.querySelector('option[data-role="' + link.getAttribute('data-apply') + '"]');
+      if (option) roleSelect.value = option.value;
     });
   });
 
@@ -173,10 +172,11 @@
   document.body.appendChild(rail);
 
   /* ---------- nav scrollspy ---------- */
+  /* Menu links may be "#why" or "/#why" (the second also works from other pages). */
   var spyLinks = {};
-  Array.prototype.forEach.call(document.querySelectorAll('.nav > a[href^="#"]'), function (a) {
-    var id = a.getAttribute('href').slice(1);
-    if (document.getElementById(id)) spyLinks[id] = a;
+  Array.prototype.forEach.call(document.querySelectorAll('.nav > a[href^="#"], .nav > a[href^="/#"]'), function (a) {
+    var id = a.getAttribute('href').split('#')[1];
+    if (id && document.getElementById(id)) spyLinks[id] = a;
   });
   var spyIds = Object.keys(spyLinks);
   var activeId = null;

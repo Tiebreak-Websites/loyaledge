@@ -1,0 +1,29 @@
+---
+/**
+ * Legal page body (privacy policy, terms) — a WordPress ACF group, passed in from
+ * privacy.astro ("privacy_policy") or terms.astro ("terms_and_conditions").
+ *
+ * "privacy_policy": {
+ *   "kicker": "Legal",
+ *   "title": "Privacy Policy",
+ *   "content": "<h2>1. Introduction</h2>\n<p>This Privacy Policy …</p>"   // WYSIWYG HTML
+ * }
+ */
+interface Props {
+  legal?: { kicker?: string; title?: string; content?: string };
+  lang?: string;
+}
+
+const { legal } = Astro.props;
+---
+
+<main id="main" class="legal-main">
+  <div class="wrap legal-wrap">
+    <header class="legal-head">
+      {legal?.kicker && <p class="legal-kicker">{legal.kicker}</p>}
+      {legal?.title && <h1>{legal.title}</h1>}
+    </header>
+
+    {legal?.content && <div class="legal-body" set:html={legal.content} />}
+  </div>
+</main>

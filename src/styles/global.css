@@ -182,6 +182,8 @@ a { color: var(--blue-700); text-decoration: none; }
 .logo { color: var(--ink); transition: opacity .2s var(--ease); }
 .logo:hover { opacity: .78; }
 .logo-svg { width: 156px; height: 47px; color: var(--ink); }
+/* Logo image from WordPress: same box as the inline SVG, keep its proportions. */
+.logo-img { display: block; object-fit: contain; }
 
 .nav { display: flex; align-items: center; gap: 2px; }
 /* plain links only — the CTA keeps its .btn styling (scoping prevents the
@@ -454,6 +456,7 @@ a { color: var(--blue-700); text-decoration: none; }
   font-size: 13.5px; font-weight: 600; color: var(--ink-soft); line-height: 1.35;
 }
 .fact svg { width: 20px; height: 20px; flex: none; color: var(--blue-700); }
+.fact img { width: 20px; height: 20px; flex: none; }
 
 .role-cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 .role-reply { margin: 0; font-size: .9rem; color: var(--mist); }
@@ -538,8 +541,12 @@ a { color: var(--blue-700); text-decoration: none; }
   transition: background-color .3s var(--ease), color .3s var(--ease),
               transform .3s var(--ease);
 }
-.perk-icon svg { width: 21px; height: 21px; }
+.perk-icon svg,
+.perk-icon img { width: 21px; height: 21px; }
+.perk-icon img { transition: filter .3s var(--ease); }
 .perk:hover .perk-icon { background: var(--blue-700); color: #fff; transform: scale(1.07) rotate(-4deg); }
+/* Icons uploaded in WordPress are images and ignore `color`: turn them white on hover. */
+.perk:hover .perk-icon img { filter: brightness(0) invert(1); }
 
 .perks-note {
   margin: 26px 0 0;
@@ -701,7 +708,34 @@ p.about-copy:not(.section-sub) { font-size: 1rem; max-width: 60ch; }
 .form-status { grid-column: 1 / -1; margin: 0; font-size: 14.5px; font-weight: 600; }
 .form-status.is-ok { color: var(--ok); }
 .form-status.is-bad { color: var(--bad); }
-#formSending { margin: 0; font-size: 14.5px; font-weight: 600; color: var(--slate); }
+.form-status.is-ok,
+.form-status.is-bad { animation: status-in .45s var(--ease) both; }
+.form-sending { margin: 0; font-size: 14.5px; font-weight: 600; color: var(--slate); }
+
+/* Sending: formsub disables the submit button while the request runs.
+   The label fades out and a spinner turns in its place. */
+.form-actions .btn[type="submit"] { position: relative; }
+.form-actions .btn[type="submit"]:disabled { color: transparent; cursor: progress; transform: none; }
+.form-actions .btn[type="submit"]:disabled::after {
+  content: ""; position: absolute; inset: 0; margin: auto;
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 2.5px solid rgba(255, 255, 255, .35); border-top-color: #fff;
+  animation: btn-spin .75s linear infinite;
+}
+/* "Sending your application" with animated dots. */
+.form-sending:not(.hidden)::after {
+  content: ""; display: inline-block; width: 1.2em; text-align: left;
+  animation: sending-dots 1.2s steps(4, end) infinite;
+}
+
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+@keyframes sending-dots { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75%, 100% { content: "..."; } }
+@keyframes status-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* SweetAlert2 success popup (application sent) in the site's colours and font. */
+.swal2-popup { font-family: var(--sans); border-radius: var(--r-sm); }
+.swal2-popup .swal2-title { color: var(--ink); }
+.swal2-popup .swal2-html-container { color: var(--slate); }
 
 /* ==========================================================================
    Footer
@@ -871,7 +905,7 @@ p.about-copy:not(.section-sub) { font-size: 1rem; max-width: 60ch; }
 }
 
 /* ==========================================================================
-   Legal pages (terms.html, privacy.html)
+   Legal pages (/terms, /privacy)
    ========================================================================== */
 
 .legal-main { padding: clamp(52px, 7vw, 88px) 0 clamp(84px, 10vw, 132px); }

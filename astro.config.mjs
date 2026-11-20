@@ -7,4 +7,8 @@ export default defineConfig({
   build: {
     format: 'file',
   },
+  // Images uploaded in WordPress are downloaded and converted to WebP at build time.
+  image: {
+    domains: ['wordpress.plexop.dev'],
+  },
 });

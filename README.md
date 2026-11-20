@@ -1,5 +1,29 @@
 # LoyalEdge — Careers Landing Page
 
+## .env
+
+```
+# WordPress URL
+WP_URL=https://wordpress.plexop.dev/one-pager/
+
+WP_ENV=dev
+
+SITE_ENV="dev"
+SITE_LANG="en"
+SITE_DOMAIN="loyaledge.net"
+SITE_SUBDOMAIN=0
+
+BRAND="LoyalEdge"
+# Page slug on the one-pager WordPress site (page "LoyalEdge", template "loyaledge")
+SITE_SLUG="loyaledge"
+
+ASTRO_SSR=0
+
+# LoyalEdge's careers form posts to v1 (v2 does not exist on the server)
+PUBLIC_CAREER_FORM_URL="https://wordpress.plexop.dev/wp-json/tiebreak/v2/career-form"
+
+```
+
 A single-page, conversion-focused recruitment site for **LoyalEdge**, the Customer
 Support careers program for **Peak Services Ltd** in Malta. It recruits multilingual
 customer-support professionals across Europe to relocate for paid training, relocation
@@ -14,16 +38,16 @@ support and career progression.
 Styles and the original progressive-enhancement script are imported from `src/styles`
 and `src/scripts`. Images in `src/assets/` are hashed into the build.
 
-| Path | Purpose |
-|------|---------|
-| `src/pages/index.astro` | Careers landing page, `JobPosting` structured data |
-| `src/pages/privacy.astro` | Privacy Policy |
-| `src/pages/terms.astro` | Terms & Conditions |
-| `src/layouts/Layout.astro` | Document shell, meta/OG tags, shared chrome |
-| `src/styles/global.css` | All styling and motion — light theme, brand `#4780FF` / `#1B3476` |
-| `src/scripts/site.js` | Progressive enhancement: nav, accordions, scrollspy, counters, reveals, form |
-| `src/assets/` | Wordmark and photography |
-| `BRIEF.md` | The build brief — goal, content rules, decisions, section-by-section spec |
+| Path                       | Purpose                                                                      |
+| -------------------------- | ---------------------------------------------------------------------------- |
+| `src/pages/index.astro`    | Careers landing page, `JobPosting` structured data                           |
+| `src/pages/privacy.astro`  | Privacy Policy                                                               |
+| `src/pages/terms.astro`    | Terms & Conditions                                                           |
+| `src/layouts/Layout.astro` | Document shell, meta/OG tags, shared chrome                                  |
+| `src/styles/global.css`    | All styling and motion — light theme, brand `#4780FF` / `#1B3476`            |
+| `src/scripts/site.js`      | Progressive enhancement: nav, accordions, scrollspy, counters, reveals, form |
+| `src/assets/`              | Wordmark and photography                                                     |
+| `BRIEF.md`                 | The build brief — goal, content rules, decisions, section-by-section spec    |
 
 Requires **Node.js 22.12.0** or later (even-numbered releases).
 

@@ -1,158 +1,115 @@
 ---
-import formsubJs from "../scripts/formsub.min.js?raw";
+/**
+ * Careers application form (with CV upload). Submits through formsub to the
+ * career-form endpoint (PUBLIC_CAREER_FORM_URL in .env, tiebreak v2), wired in
+ * src/lib/forms.js — same setup as smartconnect-careers.
+ *
+ * <CareersForm roles={wp.open_roles.roles} lang={lang} />
+ *
+ * Text: src/data/i18n.json (form_* keys). Recipient: WordPress "application_form_recipient" (recipient prop).
+ * Role options: open_roles.roles from WordPress (form_label, else title), plus form_other_role_option.
+ * Each option's value is its visible text, so the email shows the role name.
+ * site.js pre-selects the role when an "Apply for this role" button is clicked:
+ * the button's data-apply (role number) matches the option's data-role.
+ */
+import { i18n } from "@tiebreak/api/utility/util";
+
+interface Props {
+  roles?: { title?: string; form_label?: string }[];
+  recipient?: string;
+  id?: string;
+  lang?: string;
+}
+
+const { roles = [], recipient, id = "applyForm", lang = "en" } = Astro.props;
+const t = (key: string) => i18n(key, lang);
+const website = new URL(Astro.site ?? "https://loyaledge.net").hostname;
 ---
 
 <form
   class="form reveal"
-  id="applyForm"
+  id={id}
   method="POST"
   enctype="multipart/form-data"
+  data-career-form
+  data-success-message={t("form_success_message")}
+  data-error-message={t("form_error_message")}
+  data-success-button={t("form_success_button")}
 >
-  <input type="hidden" name="to" value="hr@loyaledge.net" />
-  <input type="hidden" name="website" value="loyaledge.net" />
+  <input type="hidden" name="to" value={recipient} />
+  <input type="hidden" name="website" value={website} />
 
   <div class="field">
-    <label for="name"
-      >Full name <span class="req" aria-hidden="true">*</span></label
-    >
+    <label for="name">{t("form_name_label")} <span class="req" aria-hidden="true">*</span></label>
     <input id="name" name="name" type="text" autocomplete="name" required />
   </div>
 
   <div class="field">
-    <label for="email"
-      >Email <span class="req" aria-hidden="true">*</span></label
-    >
+    <label for="email">{t("form_email_label")} <span class="req" aria-hidden="true">*</span></label>
     <input id="email" name="email" type="email" autocomplete="email" required />
   </div>
 
   <div class="field">
-    <label for="phone"
-      >Phone <span class="req" aria-hidden="true">*</span></label
-    >
+    <label for="phone">{t("form_phone_label")} <span class="req" aria-hidden="true">*</span></label>
     <input id="phone" name="phone" type="tel" autocomplete="tel" required />
   </div>
 
   <div class="field">
-    <label for="languages"
-      >Languages spoken <span class="req" aria-hidden="true">*</span></label
-    >
-    <input
-      id="languages"
-      name="language"
-      type="text"
-      placeholder="Which languages do you speak?"
-      required
-    />
+    <label for="languages">{t("form_languages_label")} <span class="req" aria-hidden="true">*</span></label>
+    <input id="languages" name="language" type="text" placeholder={t("form_languages_placeholder")} required />
   </div>
 
   <div class="field">
-    <label for="location">
-      Current location <span class="req" aria-hidden="true">*</span>
-    </label>
-    <input
-      id="location"
-      name="location"
-      type="text"
-      placeholder="City, country"
-      autocomplete="country-name"
-      required
-    />
+    <label for="location">{t("form_location_label")} <span class="req" aria-hidden="true">*</span></label>
+    <input id="location" name="location" type="text" placeholder={t("form_location_placeholder")} autocomplete="country-name" required />
   </div>
 
   <div class="field">
-    <label for="role"
-      >Role you're applying for <span class="req" aria-hidden="true">*</span
-      ></label
-    >
+    <label for="role">{t("form_role_label")} <span class="req" aria-hidden="true">*</span></label>
     <select id="role" name="position" required>
-      <option value="csr-multilingual"
-        >Customer Support Representative – (relevant language speaker)</option
-      >
-      <option value="future">Other / future opening</option>
+      {roles.map((role, i) => {
+        const label = role.form_label || role.title;
+        return <option value={label} data-role={i + 1}>{label}</option>;
+      })}
+      <option value={t("form_other_role_option")}>{t("form_other_role_option")}</option>
     </select>
   </div>
 
   <div class="field field-wide">
-    <label for="linkedin"
-      >LinkedIn profile <span class="opt">(or attach a CV below)</span></label
-    >
-    <input
-      id="linkedin"
-      name="link"
-      type="url"
-      placeholder="https://linkedin.com/in/…"
-    />
+    <label for="linkedin">{t("form_linkedin_label")} <span class="opt">{t("form_linkedin_hint")}</span></label>
+    <input id="linkedin" name="link" type="url" placeholder={t("form_linkedin_placeholder")} />
   </div>
 
   <div class="field field-wide">
-    <label for="cv"
-      >CV / résumé <span class="opt">(PDF or DOCX, optional)</span></label
-    >
+    <label for="cv">{t("form_cv_label")} <span class="opt">{t("form_cv_hint")}</span></label>
     <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx" />
   </div>
 
   <div class="field field-wide">
-    <label for="why">Why Malta? <span class="opt">(optional)</span></label>
-    <textarea
-      id="why"
-      name="message"
-      rows="4"
-      placeholder="Tell us what's drawing you to the move."></textarea>
+    <label for="why">{t("form_message_label")} <span class="opt">{t("form_message_hint")}</span></label>
+    <textarea id="why" name="message" rows="4" placeholder={t("form_message_placeholder")}></textarea>
   </div>
 
   <div class="field field-wide consent">
     <label class="check">
       <input id="consent" name="consent" type="checkbox" value="1" required />
       <span>
-        I consent to LoyalEdge storing and processing my details for the purpose
-        of this application, as described in the <a href="/privacy.html"
-          >Privacy Policy</a
-        >.
+        <Fragment set:html={t("form_consent_text")} />
         <span class="req" aria-hidden="true">*</span>
       </span>
     </label>
   </div>
 
   <div class="field-wide form-actions">
-    <button class="btn btn-primary btn-lg" type="submit" id="applySubmit">
-      Send my application
-    </button>
-    <p id="formSending" class="hidden">Sending your application…</p>
-    <p class="form-note">
-      We'll never share your details with anyone outside the hiring team.
-    </p>
+    <button class="btn btn-primary btn-lg" type="submit" id={`${id}-submit`}>{t("form_submit_label")}</button>
+    <p id={`${id}-loading`} class="form-sending hidden">{t("form_sending_text")}</p>
+    <p class="form-note">{t("form_note")}</p>
   </div>
 
-  <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+  <p class="form-status" data-form-note role="status" aria-live="polite"></p>
 </form>
 
-<script is:inline set:html={formsubJs}></script>
-<script is:inline>
-  formsub.newForm({
-    formId: "applyForm",
-    submitButton: "#applySubmit",
-    ajaxUrl: "https://wordpress.plexop.dev/wp-json/tiebreak/v1/career-form",
-    method: "POST",
-    indicator: "#formSending",
-  });
-
-  window.addEventListener("formsub:ResponseSuccess", function (event) {
-    if (event.detail.form_css_id !== "applyForm") return;
-    var status = document.getElementById("formStatus");
-    if (!status) return;
-    status.textContent =
-      event.detail.message ||
-      "Thank you — your application is in. We reply to every applicant.";
-    status.className = "form-status is-ok";
-  });
-
-  window.addEventListener("formsub:ResponseError", function (event) {
-    if (event.detail.form_css_id !== "applyForm") return;
-    var status = document.getElementById("formStatus");
-    if (!status) return;
-    status.textContent =
-      event.detail.message ||
-      "Something went wrong sending your application. Please email hr@loyaledge.net instead.";
-    status.className = "form-status is-bad";
-  });
+<script>
+  import { initCareerForms } from "@src/lib/forms";
+  initCareerForms();
 </script>

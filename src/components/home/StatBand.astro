@@ -1,0 +1,30 @@
+---
+/**
+ * Stat band under the hero — WordPress ACF group "stat_band", passed in from index.astro.
+ *
+ * "stat_band": {
+ *   "stats": [{ "value": "200+", "label": "Professionals on site" }]
+ * }
+ *
+ * Numeric values ("200+", "100%") count up when scrolled into view (site.js, `.trust strong`).
+ */
+interface Props {
+  stat_band?: { stats?: { value?: string; label?: string }[] };
+  lang?: string;
+}
+
+const { stat_band } = Astro.props;
+const stats = stat_band?.stats || [];
+---
+
+{stats.length > 0 && (
+  <div class="statband">
+    <div class="wrap">
+      <ul class="trust reveal">
+        {stats.map((stat) => (
+          <li><strong>{stat.value}</strong><span>{stat.label}</span></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+)}
