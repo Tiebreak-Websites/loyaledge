@@ -698,8 +698,11 @@ p.about-copy:not(.section-sub) { font-size: 1rem; max-width: 60ch; }
 .hidden { display: none !important; }
 .check.error { color: var(--bad); }
 
-.consent .check { display: flex; gap: 12px; align-items: flex-start; font-weight: 500; cursor: pointer; }
-.consent input { margin-top: 3px; accent-color: var(--blue-700); width: 16px; height: 16px; flex: none; }
+.consent .check { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: flex-start; font-weight: 500; cursor: pointer; }
+.consent input { margin: 3px 0 0; accent-color: var(--blue-700); width: 16px; height: 16px; flex: none; }
+.consent .check > span:not(.error-message) { flex: 1; }
+/* formsub adds the error inside the label: own line, under the text (16px box + 12px gap) */
+.consent .check .error-message { flex-basis: 100%; padding-left: 28px; }
 .consent a { text-decoration: underline; text-underline-offset: 2px; }
 
 .form-actions { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
