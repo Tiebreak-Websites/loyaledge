@@ -24,6 +24,21 @@ PUBLIC_CAREER_FORM_URL="https://wordpress.plexop.dev/wp-json/tiebreak/v2/career-
 
 ```
 
+## deploy.env
+
+```
+AWS_ACCESS_KEY_ID=""
+AWS_SECRET_ACCESS_KEY=""
+AWS_REGION="eu-central-1"
+
+# Local folder to upload (the Astro build output)
+DEPLOY_FOLDER="./dist"
+
+# Where it goes: s3://S3_BUCKET_NAME/S3_FOLDER/
+S3_BUCKET_NAME="websites-static-mkt"
+S3_FOLDER="loyaledge.net/en/"
+```
+
 A single-page, conversion-focused recruitment site for **LoyalEdge**, the Customer
 Support careers program for **Peak Services Ltd** in Malta. It recruits multilingual
 customer-support professionals across Europe to relocate for paid training, relocation
