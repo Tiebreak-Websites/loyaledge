@@ -18,3 +18,5 @@ dist/
 # Local deploy credentials
 deploy.env
 .env
+# Deploy error log written by deploy.sh
+deploy.log
